@@ -1,6 +1,6 @@
-# MODUL EMPAT
+# MODUL LIMA
  ## SOAL 1
-   Program di atas adalah program yang menghitung permutasi dan kombinasi dari dua pasang bilangan yang dimasukkan oleh pengguna.
+   Program di atas adalah program recursive yang digunakan untuk menghitung deret Fibonacci. Fungsi fibonacci menggunakan rekursi untuk menghitung nilai Fibonacci dari suatu bilangan n, yaitu jumlah dari dua angka sebelumnya dalam deret Fibonacci.
    
    ## Overview
       Program ini terdiri dari satu file bernama 'main.go' dan mencakup komponen-komponen utama berikut:

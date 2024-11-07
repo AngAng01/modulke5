@@ -7,160 +7,182 @@
       - Pernyataan 'package main', yang mendefinisikan paket untuk program yang dapat dieksekusi.
       - Pernyataan 'import', yang digunakan untuk menyertakan paket-paket yang diperlukan (dalam hal ini, 'fmt').
       - Fungsi 'main()', yang merupakan titik awal dari setiap program Go.
-      - Fungsi 'factorial(n int, hasil *int)', Fungsi ini menghitung faktorial dari bilangan n dan menyimpan hasilnya dalam variabel yang ditunjuk oleh pointer hasil. Faktorial dihitung menggunakan loop dari n hingga 1.
-      - Fungsi 'permutasi(n, r int) int', Fungsi ini menghitung permutasi dari n elemen yang diambil sebanyak r. Rumus yang digunakan adalah P(n,r) = n!/(n-r)!, dimana faktorial dari n dan n-r dihitung menggunakan fungsi factorial.
-      - Fungsi 'kombinasi(n, r int) int', Fungsi ini menghitung kombinasi dari n elemen yang diambil sebanyak r. Rumus yang digunakan adalah C(n,r) = n!/r!(n-r)!, di mana faktorial dari n, r, dan n-r dihitung menggunakan fungsi factorial.
+      - Fungsi fibonacci(n int) int, Menghitung nilai Fibonacci untuk n secara rekursif.
+      - Paket fmt, Digunakan untuk mencetak hasil ke layar menggunakan fmt.Printf.
       
    ## Code Explanation
-      ```go
-          func factorial(n int, hasil *int) {
-	            *hasil = 1 
-	            for i := n; i >= 1; i-- {
-		             *hasil *= i
-	            }
-          }
-      ```
-   Kode di atas adalah kode fungsi yang digunakan untuk menghitung faktorial dari sebuah bilangan bulat n. 
+   ```go
+   func fibonacci(n int) int {
+		`if n <= 1 {
+		 	return n
+		 }
+		 return fibonacci(n-1) + fibonacci(n-2)
+	}
+   ```
+   Kode di atas adalah fungsi rekursif untuk menghitung nilai Fibonacci dari bilangan n. Fungsi fibonacci menerima satu parameter integer n dan mengembalikan nilai Fibonacci yang sesuai. 
    
    ```go
-      func permutasi(n, r int) int {
-      	var pembilang, penyebut int
-      	factorial(n, &pembilang)
-      	factorial(n-r, &penyebut)
-      	return pembilang / penyebut
-      }
+      for i := 0; i <= 10; i++ {
+	        fmt.Printf("Fibonacci(%d) = %d\n", i, fibonacci(i))
+	    }
    ```
    Kode di atas adalah Fungsi permutasi yang digunakan untuk menghitung permutasi dari n elemen yang diambil sebanyak r. Fungsi ini pertama-tama menghitung faktorial dari n (disimpan dalam variabel pembilang) dan faktorial dari n - r (disimpan dalam variabel penyebut) dengan memanfaatkan fungsi factorial. 
    
-   ```go
-      func kombinasi(n, r int) int {
-      	var pembilang, penyebut1, penyebut2 int
-      	factorial(n, &pembilang)               
-      	factorial(r, &penyebut1)               
-      	factorial(n-r, &penyebut2)             
-      	return pembilang / (penyebut1 * penyebut2) 
-      }
-   ```
-   Kode di atas adalah fungsi yang digunakan untuk menghitung kombinasi dari n elemen yang diambil sebanyak r. 
-   
-   ```go
-      var a, b, c, d int
-   ```
-   kode diatas adalah kode yang digunakan untuk mendeklarasikan 4 variabel int yang digunakan sebagai inputan.
-   
-   ```go
-      fmt.Scan(&a, &b, &c, &d)
-   ```
-   kode diatas adalah kode yang digunakan untuk pengguna menginputkan suatu nilai untuk dieksekusi.
-   
-   ```go
-      fmt.Println(permutasi(a, c), kombinasi(a, c))
-	  fmt.Println(permutasi(b, d), kombinasi(b, d))
-   ```
-   Kode di atas adalah bagian dari fungsi main() dalam program Go yang berfungsi untuk mencetak hasil perhitungan permutasi dan kombinasi dari dua pasangan bilangan (a, c dan b, d) menggunakan fungsi fmt.Println().
-   
-  
+
   ## SOAL 2
-   Program di atas adalah program yang digunakan untuk menghitung dan membandingkan skor dari dua peserta berdasarkan jumlah tugas yang diselesaikan dan total waktu yang digunakan dalam menyelesaikan tugas tersebut. 
+   Program di atas adalah program rekursif yang digunakan untuk mencetak pola segitiga bintang dengan jumlah baris yang ditentukan oleh pengguna. Program ini memiliki dua fungsi rekursif utama, cetakBintang dan cetakPola.
    
    ## Overview
       Program ini terdiri dari satu file bernama 'main.go' dan mencakup komponen-komponen utama berikut:
       - Pernyataan 'package main', yang mendefinisikan paket untuk program yang dapat dieksekusi.
       - Pernyataan 'import', yang digunakan untuk menyertakan paket-paket yang diperlukan (dalam hal ini, 'fmt').
       - Fungsi 'main()', yang merupakan titik awal dari setiap program Go.
-      - Fungsi 'hitungSkor()', digunakan untuk menghitung jumlah tugas yang diselesaikan oleh peserta dan total waktu yang dibutuhkan untuk menyelesaikan tugas-tugas tersebut.
-      - Program membandingkan jumlah tugas yang diselesaikan oleh masing-masing peserta. Peserta dengan jumlah tugas lebih banyak dinyatakan menang.
+      - Fungsi cetakBintang(n int), Fungsi rekursif yang mencetak n bintang dalam satu baris. Jika n bernilai 0, fungsi berhenti.
+      - Fungsi cetakPola(n, current int), Fungsi rekursif yang mencetak pola segitiga dengan n baris, di mana setiap baris memiliki jumlah bintang yang sesuai dengan nilai current. Fungsi ini memanggil cetakBintang untuk mencetak bintang pada tiap baris dan kemudian memanggil dirinya sendiri untuk baris berikutnya.
       
    ## Code Explanation
-      ```go
-          func hitungSkor() (int, int) {
-              jumlahDiselesaikan := 0
-              totalWaktu := 0
-              var waktu int
-          
-              for i := 0; i < 8; i++ {
-                  fmt.Scan(&waktu)
-                  if waktu < 301 { 
-                      jumlahDiselesaikan++
-                      totalWaktu += waktu
-                  }
-              }
-          
-              return jumlahDiselesaikan, totalWaktu
-          }
-      ```
-   Kode di atas adalah fungsi yang bernama hitungSkor(), yang menghitung jumlah tugas yang diselesaikan dan total waktu yang digunakan oleh seorang peserta. Fungsi ini menginisialisasi dua variabel, jumlahDiselesaikan dan totalWaktu, kemudian menggunakan loop untuk meminta input waktu selama 8 iterasi. Jika waktu untuk suatu tugas kurang dari 301 detik, maka tugas tersebut dianggap selesai, dan jumlahDiselesaikan serta totalWaktu diperbarui. Setelah itu, fungsi mengembalikan jumlah tugas yang diselesaikan dan total waktu yang dihabiskan.
+   ```go
+   func cetakBintang(n int) {
+	    if n == 0 {
+	        return
+	    }
+	    fmt.Print("*")
+	    cetakBintang(n - 1)
+}
+   ```
+   Kode di atas adalah fungsi rekursif untuk mencetak sejumlah karakter bintang (*) dalam satu baris.
    
    ```go
-      var nama1, nama2 string
-      var jumlahDiselesaikan1, totalWaktu1, jumlahDiselesaikan2, totalWaktu2 int
+      func cetakPola(n, current int) {
+	    if current > n {
+	        return
+	    }
+	    cetakBintang(current)
+	    fmt.Println()
+	    cetakPola(n, current + 1)
+}
    ```
-   Kode di atas adalah deklarasi beberapa variabel, 'nama1' dan 'nama2' bertipe string untuk menyimpan nama dua peserta, serta 'jumlahDiselesaikan1', 'totalWaktu1', 'jumlahDiselesaikan2', dan 'totalWaktu2' bertipe int untuk menyimpan jumlah tugas yang diselesaikan dan total waktu yang dihabiskan oleh masing-masing peserta. Variabel-variabel ini digunakan untuk membandingkan kinerja kedua peserta.
-   
-   ```go
-      fmt.Scan(&nama1)
-      jumlahDiselesaikan1, totalWaktu1 = hitungSkor()
-   ```
-   Kode di atas digunakan untuk menerima input nama peserta pertama dengan fmt.Scan(&nama1) dan kemudian memanggil fungsi hitungSkor() untuk menghitung jumlah tugas yang diselesaikan dan total waktu peserta pertama, menyimpan hasilnya dalam jumlahDiselesaikan1 dan totalWaktu1.
-   
-   ```go
-      fmt.Scan(&nama2)
-      jumlahDiselesaikan2, totalWaktu2 = hitungSkor()
-   ```
-   Kode di atas berfungsi untuk menerima input nama peserta kedua dengan fmt.Scan(&nama2) dan kemudian memanggil fungsi hitungSkor() untuk menghitung jumlah tugas yang diselesaikan dan total waktu peserta kedua, menyimpan hasilnya dalam jumlahDiselesaikan2 dan totalWaktu2.
-   
-   ```go
-      if jumlahDiselesaikan1 > jumlahDiselesaikan2 || (jumlahDiselesaikan1 == jumlahDiselesaikan2 && totalWaktu1 < totalWaktu2) {
-        fmt.Printf("%s %d %d\n", nama1, jumlahDiselesaikan1, totalWaktu1)
-      } else {
-        fmt.Printf("%s %d %d\n", nama2, jumlahDiselesaikan2, totalWaktu2)
-      }
-   ```
-   kode diatas adalah Kode membandingkan skor dua peserta. Jika peserta pertama memiliki lebih banyak tugas atau waktu lebih sedikit dengan jumlah tugas yang sama, namanya ditampilkan. jika tidak, nama peserta kedua yang ditampilkan.
+   Kode di atas adalah fungsi rekursif bernama cetakPola yang digunakan untuk mencetak pola segitiga bintang dengan jumlah baris n. Fungsi ini memanfaatkan fungsi cetakBintang untuk mencetak bintang pada setiap baris dengan jumlah yang meningkat secara bertahap.
 
-
-   ## SOAL 3
-   Program di atas adalah program yang mencetak deret bilangan menurut aturan Collatz. Fungsi cetakDeret(n int) menerima input n dan mencetak nilai n hingga mencapai 1, membagi n dengan dua jika genap dan mengubahnya menjadi 3n + 1 jika ganjil. 
-   
-   ## Overview
-      Program ini terdiri dari satu file bernama 'main.go' dan mencakup komponen-komponen utama berikut:
-      - Pernyataan 'package main', yang mendefinisikan paket untuk program yang dapat dieksekusi.
-      - Pernyataan 'import', yang digunakan untuk menyertakan paket-paket yang diperlukan (dalam hal ini, 'fmt').
-      - Fungsi 'main()', yang merupakan titik awal dari setiap program Go.
-      - Fungsi cetakDeret(n int), Fungsi ini menerima integer n dan mencetak deret bilangan berdasarkan aturan Collatz hingga n mencapai 1, dengan memproses n sebagai genap atau ganjil.
-      - Struktur Perulangan, Menggunakan loop for untuk terus menjalankan proses hingga n sama dengan 1, mencetak setiap nilai n selama proses.
-      - Kondisi Genap dan Ganjil, Menggunakan kondisi if untuk memeriksa apakah n genap atau ganjil, kemudian mengubah nilai n sesuai aturan: membagi dua jika genap dan menghitung 3n + 1 jika ganjil
-      
-   ## Code Explanation
-      ```go
-          func cetakDeret(n int) {
-              for n != 1 {
-                  fmt.Printf("%d ", n) 
-                  if n%2 == 0 {
-                      n = n / 2 
-                  } else {
-                      n = 3*n + 1 
-                  }
-              }
-              fmt.Println(n) 
-          }
-      ```
-  Kode di atas adalah fungsi dalam bahasa Go bernama cetakDeret(n int), yang mencetak deret bilangan berdasarkan aturan Collatz. Fungsi ini menerima parameter integer n dan menggunakan loop for untuk mencetak nilai n hingga mencapai 1. Dalam setiap iterasi, fungsi memeriksa apakah n genap atau ganjil. Jika n genap, nilainya dibagi dua; jika ganjil, nilainya diubah menjadi 3n + 1. Proses ini terus berlanjut sampai n sama dengan 1, setelah itu nilai 1 dicetak dan fungsi selesai.
-   
    ```go
-      var n int
+       var n int
    ```
-   kode diatas adalah kode yang digunakan untuk mendeklarasikan 1 variabel int yang digunakan sebagai inputan.
-   
+   Kode var n int digunakan untuk mendeklarasikan sebuah variabel bernama n dengan tipe data integer (int).
+
    ```go
       fmt.Scan(&n)
    ```
-   kode diatas adalah kode yang digunakan untuk pengguna menginputkan suatu nilai untuk dieksekusi.
+   Kode fmt.Scan(&n) digunakan untuk membaca input dari pengguna dan menyimpannya ke dalam variabel n.
    
    ```go
-      cetakDeret(n)
+      cetakPola(n, 1)
    ```
-   Kode di atas adalah pemanggilan fungsi cetakDeret(n), yang digunakan untuk menjalankan fungsi tersebut dengan argumen n.
+   Kode di atas adalah kode untuk memanggil fungsi cetakPola, yang mencetak pola segitiga bintang dengan jumlah baris sesuai nilai n. Pemanggilan cetakPola(n, 1) menginisiasi proses rekursif untuk mencetak baris-baris bintang bertingkat.
+
+
+   ## SOAL 3
+   Program di atas adalah program yang digunakan untuk mencetak faktor-faktor dari sebuah bilangan bulat positif secara rekursif.
    
-  
+   ## Overview
+      Program ini terdiri dari satu file bernama 'main.go' dan mencakup komponen-komponen utama berikut:
+      - Pernyataan 'package main', yang mendefinisikan paket untuk program yang dapat dieksekusi.
+      - Pernyataan 'import', yang digunakan untuk menyertakan paket-paket yang diperlukan (dalam hal ini, 'fmt').
+      - Fungsi 'main()', yang merupakan titik awal dari setiap program Go.
+      - Fungsi Factors(n, i int): Fungsi rekursif yang mencari dan mencetak faktor-faktor dari bilangan n mulai dari i. Jika n % i == 0, maka i adalah faktor dari n, dan fungsi memanggil dirinya sendiri untuk memeriksa angka berikutnya.
+      - Fungsi utama yang meminta input bilangan bulat positif dari pengguna, kemudian memanggil fungsi Factors(n, 1) untuk memulai pencarian faktor-faktor dari bilangan tersebut.
+      
+   ## Code Explanation
+   ```go
+   func Factors(n, i int) {
+	    if i > n {
+	        return
+	    }
+	    if n%i == 0 {
+	        fmt.Print(i, " ")
+	    }
+	    Factors(n, i+1)
+}
+   ```
+   Kode di atas adalah kode untuk mendeklarasikan fungsi Factors yang digunakan untuk mencari dan mencetak faktor-faktor dari suatu bilangan n secara rekursif. Fungsi ini memeriksa apakah setiap angka mulai dari i hingga n adalah faktor dari n, dan jika ya, mencetak angka tersebut.
+   
+   ```go
+     var n int
+   ```
+   Kode var n int digunakan untuk mendeklarasikan sebuah variabel bernama n dengan tipe data integer (int).
+
+   ```go
+       var n int
+   ```
+   Kode var n int digunakan untuk mendeklarasikan sebuah variabel bernama n dengan tipe data integer (int).
+
+   ```go
+      fmt.Print("Masukkan bilangan bulat positif : ")
+      fmt.Scan(&n)
+   ```
+   Kode di atas adalah kode yang digunakan untuk meminta input dari pengguna dan menyimpannya dalam variabel n. 
+   
+   ```go
+      fmt.Println(n)
+   ```
+   Kode fmt.Println(n) digunakan untuk mencetak nilai variabel n ke layar, diikuti dengan pemindahan baris (newline).
+
+   ```go
+      Factors(n, 1)
+      fmt.Println()
+   ```
+   Kode di atas adalah pemanggilan fungsi Factors(n, 1) dan kemudian mencetak baris baru menggunakan fmt.Println().
+
+
+   ## SOAL 4
+   rogram di atas adalah program dalam yang mencetak urutan angka dari n hingga 1 secara rekursif, dan kemudian mencetak urutan angka dari 1 hingga n setelahnya. Program ini menggunakan fungsi rekursif untuk membangun urutan tersebut.
+   
+   ## Overview
+      Program ini terdiri dari satu file bernama 'main.go' dan mencakup komponen-komponen utama berikut:
+      - Pernyataan 'package main', yang mendefinisikan paket untuk program yang dapat dieksekusi.
+      - Pernyataan 'import', yang digunakan untuk menyertakan paket-paket yang diperlukan (dalam hal ini, 'fmt').
+      - Fungsi 'main()', yang merupakan titik awal dari setiap program Go.
+      - Fungsi Factors(n, i int): Fungsi rekursif yang mencari dan mencetak faktor-faktor dari bilangan n mulai dari i. Jika n % i == 0, maka i adalah faktor dari n, dan fungsi memanggil dirinya sendiri untuk memeriksa angka berikutnya.
+      - Fungsi utama yang meminta input bilangan bulat positif dari pengguna, kemudian memanggil fungsi Factors(n, 1) untuk memulai pencarian faktor-faktor dari bilangan tersebut.
+      
+   ## Code Explanation
+   ```go
+   func Factors(n, i int) {
+	    if i > n {
+	        return
+	    }
+	    if n%i == 0 {
+	        fmt.Print(i, " ")
+	    }
+	    Factors(n, i+1)
+}
+   ```
+   Kode di atas adalah kode untuk mendeklarasikan fungsi Factors yang digunakan untuk mencari dan mencetak faktor-faktor dari suatu bilangan n secara rekursif. Fungsi ini memeriksa apakah setiap angka mulai dari i hingga n adalah faktor dari n, dan jika ya, mencetak angka tersebut.
+   
+   ```go
+     var n int
+   ```
+   Kode var n int digunakan untuk mendeklarasikan sebuah variabel bernama n dengan tipe data integer (int).
+
+   ```go
+       var n int
+   ```
+   Kode var n int digunakan untuk mendeklarasikan sebuah variabel bernama n dengan tipe data integer (int).
+
+   ```go
+      fmt.Print("Masukkan bilangan bulat positif : ")
+      fmt.Scan(&n)
+   ```
+   Kode di atas adalah kode yang digunakan untuk meminta input dari pengguna dan menyimpannya dalam variabel n. 
+   
+   ```go
+      fmt.Println(n)
+   ```
+   Kode fmt.Println(n) digunakan untuk mencetak nilai variabel n ke layar, diikuti dengan pemindahan baris (newline).
+
+   ```go
+      Factors(n, 1)
+      fmt.Println()
+   ```
+   Kode di atas adalah pemanggilan fungsi Factors(n, 1) dan kemudian mencetak baris baru menggunakan fmt.Println().
+
    
